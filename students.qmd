@@ -1,0 +1,7 @@
+---
+title: "For Students"
+---
+
+I'm happy to work with undergraduate or graduate students on topics of mutual interest. My current research topics include: effective altruism, foreign aid, poverty alleviation, spatial statistics, distributive politics, and African politics. [This podcast episode](https://80000hours.org/podcast/episodes/alexander-berger-improving-global-health-wellbeing-clear-direct-ways/) does a good job of summarizing the areas of research that interest me.
+
+When hiring students, I am generally looking for comfort with basic statistics and experience programming in [R](https://www.r-project.org). Feel free to email me if you would like me to supervise your work (as part of an undergraduate independent study, MA, PhD, etc.) or if you would like to work for me on one of my projects.

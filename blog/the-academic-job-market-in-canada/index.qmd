@@ -1,0 +1,43 @@
+---
+title: "The Academic Job Market in Canada"
+date: "2021-02-19"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2021/2/19/the-academic-job-market-in-canada
+---
+
+Since moving back to Canada, a number of Americans have asked me for advice on the Canadian academic job market. After doing this a few times I realized: 1. it would be easier to answer these questions once and just point people to the answers, and 2. there is probably enough demand for this that a public document would be useful. For anyone wondering if I'm qualified to answer these questions or wondering about my biases: I'm a Canadian who did grad school (political science) in the US and got a VAP (2013) and then a TT job (2014) in the US and then in 2018 got a TT job in Canada and moved back to Canada. I've applied to lots of jobs in Canada and the US, been involved in hiring processes, seen flyouts in both countries, etc.
+
+My most important academic job market advice is that a large portion of the variation in the outcome is, while not literally random, totally out of your control. Remember that the job market is a matching process and, while you can do some things to make yourself more likely to get a job in general, you cannot control the other side of that process. We've all seen attractive people who don't get a second date because of "fit." The academic job market has this dynamic. TT jobs are not statements about your merit or academic contribution or personal self-worth. They're the outcome of a matching process.
+
+With that said, here are my answers to the most common questions that people ask me about academic jobs in Canada:
+
+## Do I want a job in Canada?
+
+I don't know, maybe? It is a different country and a lot of cultural norms and institutions are different, plus in much of Canada the weather is bad (think of the weather in each contiguous US state). Median or 10th percentile academic salaries are very good compared to the US and most faculty have strong unions, but 90th percentile salaries are not so good and the dollar is generally weak and cost of living in major cities is high. The vibe of the job is more relaxed than in American academia, which has pros and cons. If this is your main question, talk to people who moved and ask them about it. I'm available here.
+
+## Where can I find Canadian jobs?
+
+"Normal" American places like APSA ejobs or ISA's job listing have a subset of all Canadian jobs. In my experience University Affairs was the best single place to look for jobs, even though their search function is horrible. You can also subscribe to discipline-specific mailing lists like POLCAN2, and in exchange for sending you very long and mostly useless emails you will also get a listing of jobs.
+
+## How many jobs are there?
+
+Not that many. Canada has around the population of California, so scale your expectations accordingly. For Americans, I'd say think of Canada as adding a few jobs a year to your pool of possibilities.
+
+## In the job market, is there a preference for quantitative methods?
+
+No. If anything, it cuts the other way. Most people in most Canadian political science departments do qualitative work. There is probably a little bit of junior-senior variation here, and probably our "top 3" schools (Toronto, McGill, UBC) lean more quantitative than do the others (in general these schools face a little more towards American academia than do our other universities), but most people do qualitative work. Job calls will often specify this though, so you can always pick and choose (it's a matching process!) and if nothing around methods is listed in the job ad then I would apply regardless of the kind of work you do.
+
+## Do you need a publication in a top journal to get a job?
+
+No, but they always help. Even in departments that insist they do not care about rankings ("the rankings are US-centric anyways") and where the professors rarely publish in APSR or IO or whatever, they still help. But they're not necessary. My mental model here is that you want credible signals that you're amazing. You can get that with: a "top" journal article, a prestigious post-doc, a prestigious grant or a lot of grant money, a letter from someone impressive, etc. But again: it's a matching process not a reward or a statement of merit.
+
+## What is the role of networking in Canadian job market for political science positions?
+
+I think it's important, especially if you're coming from the US. My best advice (what I did) was to find profs from Canadian schools at US conferences and get coffee with them. I'd love if Canadian profs could send me more advice on this point as I don't know what else to tell people.
+
+## The job ad says Canadians are favoured. Is this true?
+
+This varies by institution. I think most places are looking for the best candidate regardless of nationality, but I've heard of one department that strongly prioritizes Canadians. Networking can help you know how seriously departments take this. If you don't know, I think you can probably assume they don't take it seriously and will just try to hire the candidate they think is best.
+
+A somewhat similar issue is that sometimes people claim that Americans either won't come if they get the job or won't stay (winter). I'm not sure if these claims are genuine or just deployed to promote some candidates over others, but regardless you can and should tailor your application to explain why you want to come to Canada. Did you do grad school in Michigan? Tell us you loved the weather. Do you have family in Toronto? Tell us. Networking helps here too.

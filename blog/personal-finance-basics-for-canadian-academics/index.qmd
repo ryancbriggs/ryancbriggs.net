@@ -1,0 +1,126 @@
+---
+title: "Personal Finance Basics for Canadian Academics"
+date: "2024-11-28"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2024/11/28/personal-finance-basics-for-canadian-academics
+---
+
+A few academics have recently asked me about personal finance, so I thought it might be helpful to collect my thoughts in one place. I also want to share this because I knew basically none of it when I started out as an academic, and I'd have really benefited from something like this. For a long time, I felt overwhelmed by personal finance and convinced I didn't have the time to figure it out. Looking back, that hesitation was a costly mistake---one I hope this post can help others avoid. That said, I get it: personal finance can feel intimidating, and it's not always easy to know where to start.
+
+This post is based on my own reading and experiences, so it's likely to resonate most with people in a similar situation: living in Canada, with defined benefit (DB) pensions, partners, and kids. While some details are Ontario-specific, much of the advice applies to all Canadians, and the high-level principles are broadly relevant. One place where a lot of my specific advice will not apply is if you are a dual citizen of Canada and the US. In that case, consider talking to a professional.
+
+One final note: This is a collection of personal insights, not tailored financial advice. I'm not an expert on this topic, and I can't guarantee everything here will stay up to date---so caveat lector. Read the disclaimer at the end for more on that.
+
+## Budgeting basics & financial math
+
+The first thing one should do is have a rough budget and be able to get your head around some basic financial concepts.
+
+The main point of budgeting is to get yourself to a point where you understand where your money goes and what it's used for. Ideally, you are also in a place where you can pay off debt and save, but before you take any actions you need good descriptive information. Different people do this differently and I can't tell you how best to budget, but getting good information about your finances is a first-order concern. The next step is to make space in your budget to save. This can be challenging and there are many different good approaches. I personally like to automatically move money out of my chequing account and into various investment or savings accounts every two weeks when I am paid. I like having everything on rails like this because then I know it will happen and I don't need to remember anything.
+
+Probably the most useful calculation to internalize is a basic compound interest calculation. This is the investment amount times one plus the annual rate of return raised to the power of the number of years. It's just your money times the rate of return over and over again for however many years you think you might get the return. e.g. 100 \* 1.05^10^ = 163.
+
+An easy approximation that lets you do a similar thing in your head is the rule of 72. If you take 72 (I just use 70) and divide it by the rate of return (e.g. 5%) it will give you the approximate doubling time of your investment. For example: 70 / 5 = 14 and 100 \* 1.05^14^ = 198. Doing this calculation whenever you encounter interest (or other growth rates) is helpful because it allows you to build an intuition for how compound growth works.
+
+Finally, at various points in time we will be discussing returns to investments. When doing this you should always be thinking post-tax. If you're a tenure track or tenured professor in Canada then your marginal tax rate is likely fairly high, and so it matters if an investment return is tax free vs. taxed in the hands of your child vs. taxed in your hands as capital gains vs. taxed at your marginal rate. We'll come back to this later.
+
+## Wills and insurance
+
+Second, it's worth taking a little time to make sure that your family is set up to deal with rare but catastrophic events well. This means having a will that specifies things like who will look after your kids if you die. Willfull (referral link) makes this fairly easy and cheap if your situation is straightforward, but you might need something more involved and then should contact an estate lawyer. While working on your will, also make sure that you have powers of attorney documents in order (via willful or otherwise). Make sure that the people that you name as executors or attorneys know about their role, and consider giving them a copy of the documents.
+
+You should also think about life insurance and disability insurance. If you're a Canadian academic then you probably have some life insurance from your employer. Look into this (ask HR if you can't find the documents). In my case, I could get 2x salary or 3x salary life insurance from my employer. If you're dealing with low multiples like this, you should almost always pick the larger number because getting it through your employer is probably cheaper than buying it yourself. However, for very many people 3x salary is not enough. To figure out how much you need, you need to think about what your family will need in the event that you die and then do some rough math around this. In my case, I wanted to make sure that if my wife or I died then the other person could pay off our mortgage and put all 3 kids through university. If you're young and healthy then term life insurance is pretty cheap, so you can get a lot. In my case we each bought 700k of life insurance, which comes out to around 1 million each when combined with the employer plan. To buy this you just need to shop around online. The whole process is pretty painless.
+
+Disability insurance is similar, in that it is provided by your employer and you may want to consider a top up. It will typically not cover 100% of your salary, and you should look into it to avoid surprises if you ever need it. I was satisfied with what my employer provided so I don't have as much to say here, but it is worth a quick check because a little bit of time now can potentially blunt a catastrophe later.
+
+## Debt and emergency funds
+
+If you have high-interest debt, then paying it off first is usually your best choice. For example, if you have $100 to either invest or pay off debt, and your debt carries a 10% interest rate while an investment offers a 10% return, you'll come out behind by investing---because your $10 investment gain will be taxed while paying off the debt provides a tax-free "return." This post-tax logic typically makes paying off high-interest debt more favourable. A related point is to avoid credit card debt like the plague. If your debt has a low interest rate (such as a mortgage) then not paying it off quickly and instead investing more in stocks is a reasonable choice.
+
+Consider maintaining an emergency fund in a high-interest savings account. Typical guidance for the average person is to save a few months of living expenses in a way that is quickly accessible. The amount to save is a personal decision, but tenured academics probably do not need as large an emergency fund as others, given the relative stability of our jobs. My fund is fairly small and is mostly there to cover emergency home repairs.
+
+## Investments
+
+Once you get your budget and will and life insurance in order, the next step is to begin investing. Our goal with investing is to grow our investable assets over time. For many of us that will only be a small share of our wealth, as lots of it will be in our house or DB pension. However, our investable assets are a part of our financial life that will suffer if we do not make some affirmative choices, so they deserve some attention.
+
+The first step is to open a brokerage account. This can be done at major banks or online platforms. I have a major bank brokerage account and an account with WealthSimple (referral link). The former can do a bit more but has higher fees, and the latter is easier to use and cheaper but doesn't have all of the options of the former. Either option is much better than not opening any account. Don't be paralyzed by choice.
+
+One tip is that registered accounts (those with special tax treatment) have contribution limits and they apply to the registered account type and not the financial institution. For example, your RESP limit is 50k per child and it does not matter if you have one RESP at WealthSimple or 5 RESP accounts spread across major banks. The limit is the same. You don't want to go over these limits, so for tracking purposes you probably want to only have one account of each type and have that at 1 financial institution.
+
+## Portfolio construction
+
+Once you have an account set up you need to buy investments. We're doing this because we hope to grow or at least maintain the value of our cash over time. You might think that it's easy to maintain the value of cash over time, but it really isn't. Inflation runs at around 2% a year so the purchasing power of your cash erodes over time. Also, you pay taxes on your investment returns so if your rate of return matches the rate of inflation you will lose purchasing power after tax (more on this later).
+
+So we want to do things with our money that allow us to grow or at least not lose purchasing power over time. We're going to do that by buying things on public markets. Why public instead of private? Because we don't know anything about private markets and we probably don't have connections and public markets are easy to access (they're public). The main things we're going to consider buying are stocks and bonds.
+
+Stocks are ownership shares in a company that entitle you to shares in its profits. Sometimes those are paid out as dividends, and sometimes they appear as an increase in the value of the stock (a capital gain).
+
+Bonds are basically just IOUs. You give a government or company some money and they promise to pay you back what you gave plus some extra money on a date in the future. These IOUs can then be traded back and forth before the payment date, so unlike a typical GIC they are liquid. Stocks tend to pay more than bonds because they are riskier. The relationship between (expected) risk and (expected) return is close to a law of finance. If your investment has lower risk, you will get a lower expected return. You're basically being compensated for taking on risk, so if you take on more risk then you can expect a higher return---but of course this expectation may not materialize. Often people try to mix stocks and bonds together in their portfolio so that they can get some of the high returns of the stock market but with more of the security of bonds.
+
+This act of picking investments is called portfolio construction. People usually think of this as the part of financial planning that is most deserving of attention, but it's not. The advent of all-in-one exchange traded funds (ETFs) like XEQT or VBAL means that portfolio construction is basically a solved problem. To back up a step, ETFs are publicly traded "boxes" that companies put things in. They have tickers like a stock and you buy and sell them like stocks. Picking stocks individually is a bad idea because while markets may not literally be perfectly efficient you and I certainly don't have any edge. To make matters worse, stock returns have a long tail where most stocks lose money over their lifetime but some do exceptionally well. This means that random guessing is likely to produce bad outcomes. People sometimes respond to this by hiring a professional to do the stock picking for them but any professional that will take your money is not going to do better than the market average as a whole. They will however take a percentage fee of what you invested every year and this means after their fees you should expect to do worse than the market average. Companies have responded to this by making ETFs that hold more or less all of the stocks in the stock market, weighted by their market cap. This kind of dumb aggregation can be done cheaply, so ETF fees are usually around 10x lower than hiring someone. The upshot of all this is that literally all that we have to do to make an excellent portfolio is buy an ETF that holds the global market. That's it. Don't do other things. Literally just do this.
+
+This does not mean that investing is easy. It is not, but the problems are almost entirely behavioural. If you can regularly set aside money and buy more of your chosen ETF then you will likely do well over the long-term. Do not buy individual stocks. Do not trade regularly. Do not try to time the market by buying when you think it is low or selling when you think it is high. Do not pick special ETFs aimed at dividend yield or certain sectors of the economy. You are not smarter than the market. If you can capture market gains in a low-fee and tax efficient way then you will be one of the better investors in Canada. If you don't want to take my word for it, then see [this](https://www.canadianportfoliomanagerblog.com/how-to-use-vanguards-new-asset-allocation-etfs/) or [this](https://canadiancouchpotato.com/getting-started/).
+
+Which particular ETF you should buy mostly comes down to risk tolerance. If you're more risk averse you will hold a larger share of bonds and if you're okay taking on more risk you will hold a larger share of stocks.
+
+| Ratio of stocks to bonds | Example ETFs |
+|--------------------------|-------------|
+| 100:0 | VEQT, XEQT |
+| 80:20 | VGRO, XGRO |
+| 60:40 | VBAL, XBAL |
+| 40:60 | VCNS, XCNS |
+| 20:80 | VCIP, XINC |
+| 0:100 | VAB, XBB |
+
+What mix is right for you depends on a few factors. You want to ask yourself when you will need the money and how likely you are to freak out and sell if the market drops (this is the behavioural question above). You can find online quizzes to help you assess risk tolerance.
+
+For academics, especially tenured ones with DB pensions, I think if you don't need the money for at least 10 years then you want to go 100% equities and so buy VEQT or XEQT or an equivalent. This is because your salary is quite stable and you have (or will have) a lot of money in your DB pension. This matters because your DB pension is essentially a bond as it gives you a stream of stable, locked-in income payments in retirement. So if you think across your entire financial life then you already hold a lot of "bonds." Your challenge is not stability, it's capturing the upside of equity markets. Seen this way, so long as you do not need the money for a while and will not panic sell when things crash then moving your investable assets mostly or entirely into a diversified group of stocks will help to balance out your overall portfolio.
+
+If this all sounds too complicated then companies like WealthSimple offer roboadvisors that make portfolio choices for you, but I think for most academics they'll not add enough value over a simple all-in-one ETF to justify their somewhat higher (but still low) fee.
+
+## Accounts
+
+The accounts in which you decide to invest your money matter because certain accounts have special tax treatment or government matching grants. I'll outline the most relevant ones to professors here, but this list is not exhaustive. Any of these accounts can hold ETFs, provided your brokerage allows it (they all should, but double check).
+
+### Non-registered account
+
+Registered accounts get special treatment, so non-registered accounts are just plain investment accounts. You will pay tax on your investment gains. You will use these accounts if you have already filled your registered accounts.
+
+The reason you want to fill your other accounts first is that investment returns are taxed. Growth in the value of stocks (or your ETF) is taxed as a capital gain, which in most cases means that you will pay tax at your marginal rate on half of the gain. Interest income, like from a GIC or a bond or a high interest savings account, is fully taxed at your marginal rate. So if we could pick we would prefer capital gains to interest income.
+
+### TFSA
+
+The tax free savings account is a misnomer because it isn't especially useful as a savings account. Think of it as a tax free investment account. As of writing you can add $7000 a year to it and any investment gains that you make are not taxed at all. Even better, when your investments increase and you withdraw the money your "room" in the account is saved. This means that in the next calendar year you can put money back into the account up to what you withdrew (plus the annual increment). If you are just starting saving and do not have kids, then this is a good first place to put money. You should definitely have filled your TFSA before you touch a non-registered account.
+
+A final small thing for TFSAs is if you have a spouse then you should probably add them to your TFSA as a successor holder (and they should do the same for you). This means that if you die they essentially inherit your account and so they gain the investments and the contribution room and it all stays tax free. This is unlike beneficiaries, who would get their share of the market value of your account in cash.
+
+### RESP
+
+The RESP is a higher education savings account. You can set them up per child or per family (I recommend family if you have more than 1 kid). You can contribute up to 50k per child, and every year the first 2500 that you contribute will get a 500 matching grant from the government. This is free money, so you should take it by opening an RESP when your child is young and then adding 2500 each year per kid. When you take out the money then the investment growth and grants are taxed in the hands of the child, who presumably has little income and so pays little in tax. Your contributions are tax free as they were already post-tax dollars.
+
+There are lots of ways to optimize contributions or withdrawals, but the most important single thing is that you are adding 2500 annually and investing in an ETF like XBAL or XGRO or XEQT. As with all of this I encourage people to read more, but if you just do these basic things you'll be in a decent place and your future self (and child) will thank you. If you want to optimize this a little bit and you have extra money, then you can front load your contributions by adding 14k up front so that you will eventually hit 50k per child but you also max your annual grant.
+
+### RRSP
+
+This is your retirement account. Money you add to it now is basically locked up until you retire, at which point you have to draw a certain fraction of it each year. You are taxed on these withdrawals. RRSPs have an annual contribution limit based on your salary and you will likely not have much annual contribution room because your DB pension takes up RRSP room. But you might have a few thousand dollars of contribution room each year. You are taxed when you withdraw from your RRSP, but you get a tax deduction when you contribute (so you aren't taxed twice). This means that if you contribute to your RRSP in one year you will get a tax refund (for income tax you paid on that money) and then you can use that refund to fund a RESP or TFSA. This is a useful account, but if you have a good DB pension then you should probably fill your TFSA (and RESP) before your RRSP.
+
+### FHSA
+
+The FHSA (First Home Savings Account) is a relatively new account introduced after I purchased my home, so I know less about it. That said, it appears to be a valuable tool with favorable tax treatment. It allows first-time homebuyers to save up to $8,000 per year, with a lifetime limit of $40,000, and the savings grow tax-free. If you don't end up using the funds to buy a house, you can transfer them to your RRSP without impacting your RRSP contribution room---a significant benefit for those with DB pensions and limited RRSP space. For more details, see [here](https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/first-home-savings-account.html) or [here](https://www.wealthsimple.com/en-ca/learn/fhsa).
+
+## Fine tuning
+
+One can spend a lot of time trying to tune portfolios to achieve maximum tax efficiency. For example, if you hold bonds then maybe they should be in your TFSA because they get taxed at your marginal rate? Or if you have an RRSP and want to hold US stocks then doing so in a USD account has a small tax advantage because then the US will not charge a foreign withholding tax on them. If you find this fun then by all means dig into it, but if you do not find it fun then you can safely ignore all of this. The gains you get from this kind of fine tuning are small. The worst case would be if someone was paralyzed from making any decision because they worried about such fine tuning. Don't worry about it. Just get some money in the market.
+
+## Charity
+
+Canada has a fairly generous charity tax deduction. For example, a donation of $1000 in Ontario can generate a tax credit of $360. To take advantage of this, make sure that you donate to a registered Canadian charity and keep your receipts.
+
+If you want to further optimize donations and you have ETFs in a non-registered account, then you could donate shares in your ETF to a charity. If you do this then your tax credit is calculated on the market value of the shares. If you were to sell them and then donate the money then you would have to pay capital gains taxes first. If you're donating a lot of money or the ETF has seen a large capital gain then this difference can be meaningful. This process isn't hard, you just have to fill out a form with your brokerage and tell the relevant charity. Guidance is available [here](https://www.canada.ca/en/revenue-agency/services/charities-giving/charities/policies-guidance/policy-commentary-017-gifts-publicly-traded-securities.html) and [here](https://www.wealthsimple.com/en-ca/learn/donate-stocks-to-charity).
+
+## Takeaways
+
+If you haven't, you should probably have a budget and a will and (more) life insurance. You should probably also have a brokerage account where you regularly add money and buy some market index tracking ETF. If you have kids, then putting 2500 per kid per year into their RESP is a good idea. Otherwise, your TFSA or FHSA are great places to start saving and investing. The main enemy here is paralysis, where you do nothing and allow inflation to erode the value of your money. If anyone finds errors or unclear statements or things I should add to this, you can reach me at my university email address or on [twitter](https://twitter.com/ryancbriggs) or [bluesky](https://bsky.app/profile/ryancbriggs.bsky.social).
+
+## Disclaimer
+
+The information in this post is for educational purposes only and should not be considered financial advice. I am not a licensed financial advisor, and the content reflects my personal understanding and experiences. Everyone's financial situation is unique, so consult a qualified professional before making financial decisions.

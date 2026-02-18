@@ -1,0 +1,41 @@
+---
+title: "Teaching Materials"
+---
+
+This is a collection of teaching materials that others may find useful. **I made this material to be used, borrowed, stolen, etc. I do not care about credit. Please use this material however you want.**
+
+## Effective Altruism
+
+I have found that some lectures or discussions of international development material can be improved through the addition of some insights from (or collected by) the effective altruism community. I've gathered three of those insights here. I describe each one and accompany that with a small powerpoint presentation and a reading list.
+
+### Cost-effectiveness in social interventions
+
+*What is our best guess as to the shape of the distribution of cost-effectiveness in social interventions (charity projects, aid projects)?* Put more crudely, how much more cost-effective should we think is a top project vs. the average project? Why do we think this? I've found that most people's intuitions are shaped by living in a market economy, where the "bang for your buck" in one good is generally similar to that in a rival good. However, charity or aid projects have few or none of the feedback loops and accountability mechanisms built into markets, so our best guess for the ratio of top to middle should be higher. But how much higher?
+
+[Powerpoint presentation of this material](files/cost-effectiveness.pptx)
+
+#### Readings
+
+Ord, T. (2013). The moral imperative toward cost-effectiveness in global health. [Center for Global Development](https://www.cgdev.org/sites/default/files/1427016_file_moral_imperative_cost_effectiveness.pdf), 12.
+
+Caviola, L., Schubert, S., Teperman, E., Moss, D., Greenberg, S., & Faber, N. S. (2020). Donors vastly underestimate differences in charities' effectiveness. [Judgment and Decision Making](https://journal.sjdm.org/20/200504/jdm200504.pdf), 15(4), 509-516. [This is a popular summary](https://www.psychologytoday.com/us/blog/ineffective-altruism/202009/how-much-does-it-matter-which-charity-you-choose).
+
+[Giving What We Can](https://www.givingwhatwecan.org/charity-comparisons) also has a useful webpage with some anecdotal evidence on effectiveness comparisons, as well as some exercises to help people become less [scope insensitive](https://en.wikipedia.org/wiki/Scope_neglect).
+
+[80,000 hours](https://80000hours.org/2023/02/how-much-do-solutions-differ-in-effectiveness/) also has a useful page pulling together many cost-effectiveness estimates with discussion and caveats.
+
+### Global income inequality and Singer's pond
+
+In progress.
+
+### Statistics
+
+In progress.
+
+## Syllabi
+
+**IDEV 3400 (2021)**: [Managing and Evaluating Change in Development](files/IDEV-3400-Syllabus-W2021.pdf).
+This is an undergraduate applied course on project evaluation. It covers basics of: Tidy R, statistics for RCTs, RCT basics.
+
+**IDEV 6800 (2021)**: [Theories and Debates in Development](files/IDEV-6800-Fall-2021.pdf).
+This is a PhD reading course. It historicizes key theoretical concepts in development (2/3 of course) and covers the most common ways that development studies researchers create knowledge (1/3 course on epistemology).

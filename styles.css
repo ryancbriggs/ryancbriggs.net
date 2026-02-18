@@ -1,0 +1,26 @@
+/* Minimal custom styles - placeholder for future theming */
+
+/* Clean up link colors */
+a {
+  color: #c0392b;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Publication list styling */
+.pub-entry {
+  margin-bottom: 0.8em;
+}
+.pub-entry .pub-title {
+  font-weight: 500;
+}
+.pub-entry .pub-venue {
+  font-style: italic;
+}
+
+/* Blog post listing */
+.quarto-listing {
+  margin-top: 1em;
+}

@@ -1,0 +1,25 @@
+---
+title: "Global poverty trends with national discounting"
+date: "2021-05-31"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2021/5/31/global-poverty-trends-with-national-discounting
+---
+
+Every Fall I teach a third-year undergraduate course on Poverty & Inequality at the University of Guelph. The first third of the course is on normative issues and some history, the second third is all about measurement, and the final third is about the "science" of poverty, or what we know about what poverty causes and what can cause poverty to go up or down.
+
+In the two first sections of the course we sometimes discuss issues of nationalism. What do we owe to people in our country vs. people elsewhere? How should we feel about using different (PPP) poverty lines in different places? Just descriptively, how much poverty exists within Canada (or the United States) relative to other countries?
+
+I made [the following Shiny app](https://ryanbriggs.shinyapps.io/PovcalNet_weighted/) in order to let my students explore these and other related questions on their own. The app uses data from [povcalnet](http://iresearch.worldbank.org/PovcalNet/home.aspx) and lets you select a home country, a poverty line, and it lets you move a slider to decide how much you value the life of a foreigner relative to the life of someone in your home country. It will then show you a "weighted global poverty" headcount ratio, where the global population has been adjusted to take your weighting into account.
+
+![Shiny app default view](shiny-app-default.png)
+
+When you load it, it looks like this: China is huge and used to be very poor, so even if we count everyone the same then China still accounted for a lot of the global population living under $2/day in 1980 (I'm always going to be using 2011 PPPs). Canada is small and well off, so even if we say that a foreigner's life counts for only 1% of a Canadian's life and we set the poverty line at $40/day, most poverty would still be outside Canada.
+
+![Poverty outside Canada even with extreme discounting](shiny-app-canada.png)
+
+Finally, one nice thing is that if you set the slider to zero then you can see changes in headcount ratios over time and under any line for any country. The following graph shows how the % of the Canadian population living under $40/day has changed over time.
+
+![Canadian poverty trend under $40/day](shiny-app-canada-40.png)
+
+Once I built this I thought that possibly other people would find it useful too, so I posted it on [shinyapps](https://ryanbriggs.shinyapps.io/PovcalNet_weighted/) so anyone could use it. I think it offers a nice way to get students to think about some of the normative issues and measurement issues at work when we talk about "global poverty."

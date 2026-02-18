@@ -1,0 +1,7 @@
+_site/
+.quarto/
+*.DS_Store
+cv/_generated/
+cv/output/
+
+/.quarto/

@@ -1,0 +1,37 @@
+---
+title: "The Drunk World Bank Twitterbot"
+date: "2015-03-24"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2015/3/24/the-drunk-world-bank-twitterbot
+---
+
+[I made a twitterbot](https://twitter.com/DrunkWB) that posts pseudo-random tweets formed from samples of text from the five most recent [World Development Reports](https://openknowledge.worldbank.org/handle/10986/2124). My reasons for writing the bot, in order of importance, were: I wanted to learn something new in R, I thought that the results would make me laugh, I had a little bit of time to kill at ORD after the [MPSA conference](http://www.mpsanet.org), and finally, I thought that the resulting development babble might make us think a little about how development experts communicate. Here is one example tweet:
+
+> "It recognized that legal equality was not revealed as shown by the expansion of the variation in crime rates in agrarian economies."
+>
+> --- @DrunkWB, [April 24, 2015](https://twitter.com/DrunkWB/status/591618513971851264)
+
+## The Problem
+
+My goal in writing the bot was to produce text that was recognizably from a development agency like the Bank but was also random enough to be funny. It had to have enough syntactical structure to sort of make sense, but it had to reach this point without any actual knowledge of grammar. This is a perfect application of Markov chains, and this entire project was inspired by episode 20 of Partially Derivative when Chris and Jonathan were talking about drunk beer reviews. As I write this, I realize that I must have lifted the idea of calling the bot "drunk" from Greg Reda, so hat tip to Greg.
+
+I read Greg's excellent post on Markov chains and the Markov chain wikipedia page and then googled around to find someone who had made a similar bot in R (most are in Python). I couldn't find a Markov chain twitterbot written in R, but I did find a blog post that gave me useful sample code for posting text from R to twitter. Aside from these sources, it seemed that I had to solve the problem myself.
+
+## My Approach
+
+I had no real experience with Markov chains before this project, and at first they sounded complicated. However, like a lot of mathematical ideas, they are remarkably simple once you get them. The fundamental idea is that we can make a chain of predictions where each prediction for the next turn (t+1) is informed only by information present in the current state (t). In my case, I knew that I wanted to chain together words that had local structure so that any set of three consecutive words would make sense. I also wanted to do this based on the language of the Bank, so I started by copying and pasting all of the text (excluding bibliographies and boilerplate text) from the five most recent World Development Reports into a plain text file. I then cut this text file into all consecutive three word segments (word triplets) and counted the frequency with which they occurred in the text. Most occurred once, but some were more common.
+
+To start the chain I draw one word triplet randomly, but with the probability of being selected being proportional to the triplet's use in the WDRs. That three word triplet is the start of our tweet. Perhaps it is "Tailor technology to". Next, find the subset of all word triplets whose first two words are the same as the last two words of the current tweet (technology to). In the current example, that set is small and includes only "technology to democratize", "technology to local", and "technology to make". I then draw another tweet at random (but using the probability weights) from this subset and add the last word onto the current tweet. Perhaps it now reads "Tailor technology to democratize". This process is repeated until you have a string that is long enough to be a tweet. In this way, we can build up a tweet where each additional word is selected only using information on the two trailing words. The result is the local structure that makes most tweets at least partially intelligible.
+
+I'm leaving out a lot of details like: cleaning the WDR text to avoid things like page numbers, inset boxes of text, or tables; little tweaks to get the tweet to be the right length or avoid word repetition; or how I scheduled the posting to twitter; but that is the general idea.
+
+## Improving my approach
+
+The naive approach above worked, but the tweets felt too random. Reading them, I could see that part of the problem was with the start and end of tweets. Tweets ending in words like "and" seemed off. My first solution was to include a list of words that would be cut from tweets before posting, but this was a hack and the list of "bad ending words" kept growing.
+
+I realized that a much better solution was to scan the WDR text and isolate the word triplets that start or end sentences. I could then use those triplets as bookends for the rest of the chain. Finding these starting or ending triplets is a fairly simple problem, as the start of English sentences have capital letters that follow a period and a space, and all sentences end in a period and a space. After some pattern matching, I produced three tables of word triplets. One had the word triplets that start sentences and their frequencies, one had the middle words and their frequencies, and one had sentence ending words. I then worked these new tables into the matching procedure above. I would start with a draw from the starting triplets file and then fill it out with the middle words before capping it with a draw from the ending words table. I'm rather proud of the results:
+
+> "Formal arrangements to share information on disaster response can worsen it."
+>
+> --- @DrunkWB, [April 23, 2015](https://twitter.com/DrunkWB/status/591330088009932801)
