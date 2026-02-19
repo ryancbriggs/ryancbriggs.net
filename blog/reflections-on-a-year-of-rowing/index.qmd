@@ -15,18 +15,57 @@ I thought about it for a bit and came up with 4 criteria for my future exercise 
 1. It needed to be fully body, muscle and cardio
 2. I would be unlikely to injure myself
 3. I could get a good workout in 20 min
-4. I could do it every day or nearly every day at home
+4. It would fit in my (small) basement
 
-I settled on indoor rowing after a friend told me she rowed every day. I tried it once. It was awful. My initial reaction was probably the main thing going for it: I was sore and out of breath after just 4 and a half minutes. That told me that I was working a large number of muscles and getting my cardio up. Rowing was also unlikely to injure me. I later read Pete Plan which confirmed a lot of what I was already doing and taught me about mixing up the kinds of rows I was doing every day.
+I asked on Twitter and the replies quickly converged on either putting a pool in my basement (unlikely) or buying an erg. After borrowing a friend’s erg for a week, I settled on that and bought the standard C2 erg that everyone seems to recommend. 
 
-I could go on about the merits of rowing, but what I actually wanted to do with this post was reflect on how exercise has affected me after a year. Most of these are not directly about exercise. Some of them I've discovered myself and some I've read about.
+## Sticking to it
 
-- The most important effect of exercise has been on my mental health. I feel noticeably better after exercise. I mostly notice the improvement indirectly, in that I have become less irritable throughout the day. My wife noticed this, which validates the observation. It's really important.
-- Back pain is basically gone. I sit in front of a computer or in front of my students all day, and rowing has effectively treated this.
-- I think I look much better. Rowing uses lots of muscles in your legs, core, and back and over a year has led to visible improvements in my body.
-- I used to think that the "calories in minus calories out" framing of exercise and body fat was sufficient. I no longer think this. For the first 5 or 6 months of rowing I made zero changes to my diet and I lost about 5 pounds, which is pretty much nothing for a year of exercise. I think the difference between exercising and not exercising is vastly more about changes to one's body that aren't reflected in body weight (including mental health) than it is about body weight and it seems unhealthy to conflate them.
-- After about 6 months I did start to lose weight, but only because rowing prompted some unrelated diet changes. While exercising I drink a lot of water and after finishing my row my appetite is suppressed for a while. I noticed this and started exploiting it, changing a habit of snacking between dinner and bed by rowing after dinner and then not wanting to eat before going to bed. Since this change I've lost another 10 pounds, but I think it's important that it wasn't exercise itself that caused the weight loss---it was a behaviour change that exercise enabled.
-- I'm somewhat more vain now. I used to not really think about vanity, and when it did cross my mind I appreciated how I wasn't vain at all. Now I think that's not so impressive because I didn't have anything to be vain about. I'm glad this discovery happened when I was already older.
+I’ve made half-hearted efforts at setting up an exercise habit before, but this was my first serious attempt.  Rowing seemed pretty brutal and as I said I did not like exercise, so I wasn’t sure I’d stick to it. Here are 4 things that I did to try to help adherence:
+
+I told everyone I was going to row regularly. This included talking about rowing a decent amount on social media. My goal here was to make it more embarrassing to fail.
+
+I wrote a series of R scripts to visualize the rowing data from my erg and health data from my Apple Watch. I thought I’d find the health results motivating and I’d find the process rewarding because I like messing around with data. Rowing now wasn’t just exercise, it was adding a row to my dataset.
+
+I used the data above to motivate myself. For example, I tracked my “cost per use of the erg.” One nice thing about this number is that it drops faster when your number of uses is lower (and so the habit isn’t as developed). I did not want to have just wasted like $1000 on exercise equipment I didn’t use, so seeing this number drop was motivating. Later, I started tracking my 5k and 2k times and found that motivating as well.
+
+I found music that made rowing somewhat less terrible in the moment.
+
+## Results 
+
+I have now been rowing for a little over a year and I have a pretty established exercise habit. I row at least a few times a week. On a heavy month I’ll do over 150k on the erg and on a light month I’ll do more like 75k. Here are a few of the things I’ve noticed about my body since rowing:
+
+* My posture got accidentally better after a few months. I noticed this when I realized I was looking at the things in my house from a slightly different angle. Everyone always says “remember to stand up straight” as advice to improve your posture but really they should be saying “build more muscle.”
+
+  * Relatedly, I feel internally more solid in my core. This makes some ways I used to slouch kind of uncomfortable now.
+
+* When I walk or stand I feel like I’m better connected to the ground. Almost like gravity is 10% greater, but without any associated strain. It took me like 6 to 8 months to notice this.
+
+* I eat way more, especially when I do longer rows. A 15k row runs a little over an hour for me and burns 900–1000 calories. When I’m doing longer rows I basically have to eat a second dinner, but I see this as a win because I like eating.
+
+* My resting heart rate is now about 20 bpm lower than when I started rowing.
+
+* I used to feel like my body was basically a homogenous solid. Now I feel like I have a skeleton with very specific muscles hanging off of it. I can use those specific muscles to do specific things. I sort of feel the specific muscles. This is a small positive, but it’s neat. It took me almost a year to notice this.
+
+* I’m 5-10 pounds heavier than when I started. My shirts fit tighter than before around my shoulders and my underwear fits tighter around my upper legs. I think my waist is actually a bit smaller, but I’m not totally sure as I didn’t take consistent measurements.
+
+* The back pain is gone.
+
+* Mental ticks that I associate with being younger are (sort of) back. If I do a row and then drive the car somewhere, I’m a more aggressive driver. A lot of things that I associate with having a “younger guy’s brain” are at least partially back. There are negatives here but on balance I like it.
+
+* It’s nice to be able to lift up your kids basically effortlessly, and run for a bit and feel fine.
+
+One thing that didn’t change is my daily energy level. My day to day mood feels basically the same as well, though rowing is a way that I can blow off steam when I’m grumpy. 
+
+After a few months of rowing I started channelling a lot of my natural competitive energy into beating my past rowing times. I think because of this I feel less competitive in other areas of life, like my job. I see this as a pure win because being competitive in science or academia is dumb as most of the actually important stuff is not zero sum and treating it as a competition tends to make people less happy.
+
+Finally, I kind of love the harsh honesty of the erg. Unlike a lot of areas of life, it is just a zero bullshit environment. Your time is your time and if it’s slow then you should have gone harder. It reminds me of why I liked math instead of other subjects  when I was in grade school. There is a sort of austere clarity here.
+
+Regular rowing has a few downsides too. On the negative side of the ledger:
+
+* Rowing takes time. I’ve spent over 95 hours rowing. Some of that would have been addictive phone time I wouldn’t miss, but some of it would have surely been put towards good stuff too. I think rowing is a pretty time-efficient form of exercise, but regularly exercising takes a lot of time.
+
+* I’m somewhat more vain now. I used to not really think about vanity, and when it did cross my mind I appreciated how I wasn’t vain at all. Now I think that’s not so impressive because I didn’t have anything to be vain about. I’m glad this discovery happened when I was already older.
 
 ## My rowing performance
 
