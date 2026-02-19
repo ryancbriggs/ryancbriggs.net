@@ -152,6 +152,10 @@ def ends_punct(s):
 def with_period(s):
     return s if ends_punct(s) else s + "."
 
+def with_period_for_display(display_text, plain_text):
+    """Append a period to display text only if the underlying plain text needs one."""
+    return display_text if ends_punct(plain_text) else display_text + "."
+
 
 # ---------------------------------------------------------------------------
 # Categorization: driven by the `keywords` field in each .bib entry
@@ -213,7 +217,7 @@ def format_article_md(entry):
     else:
         title_md = title
 
-    line = f"{with_period(authors)} {year_display}. {title_md}. {with_period(venue)}"
+    line = f"{with_period(authors)} {year_display}. {with_period_for_display(title_md, title)} {with_period(venue)}"
 
     if note:
         line += f"\\\n*{note}*"
@@ -259,7 +263,7 @@ def format_wip_md(entry):
     else:
         title_md = title
 
-    return f"{with_period(authors)} {with_period(title_md)}"
+    return f"{with_period(authors)} {with_period_for_display(title_md, title)}"
 
 
 def format_other_writing_md(entry):
@@ -275,7 +279,7 @@ def format_other_writing_md(entry):
     else:
         title_md = title
 
-    line = f"{with_period(authors)} ({year}). {title_md}."
+    line = f"{with_period(authors)} ({year}). {with_period_for_display(title_md, title)}"
     if venue:
         line += f" *{venue}*."
     return line

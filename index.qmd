@@ -15,6 +15,6 @@ about:
       href: http://twitter.com/ryancbriggs
 ---
 
-I'm a social scientist and associate professor in the [Guelph Institute of Development Studies](https://www.uoguelph.ca/gids/) and [Department of Political Science](https://www.uoguelph.ca/polisci/) at the [University of Guelph](https://www.uoguelph.ca/). My [research interests](research.qmd) include meta science, foreign aid, African politics, and effective altruism.
+I'm a social scientist and associate professor in the [Guelph Institute of Development Studies](https://www.uoguelph.ca/gids/) and [Department of Political Science](https://www.uoguelph.ca/polisci/) at the [University of Guelph](https://www.uoguelph.ca/). My research interests include [meta science](research.qmd#methodology), [foreign aid](research.qmd#foreign-aid-development-studies), [African politics](research.qmd#african-politics), and effective altruism.
 
 Before moving to the University of Guelph, I taught at [Virginia Tech](http://www.vt.edu) and [American University](http://www.american.edu/sis).

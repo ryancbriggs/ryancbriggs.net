@@ -6,7 +6,7 @@ title: "Research"
 
 ### Methodology
 
-Brodeur, Abel (and >300 co-authors including Ryan C. Briggs). (accepted). Computational Reproducibility and Robustness of Empirical Economics and Political Science Research Between 2022 and 2023. *Nature*.
+Brodeur, Abel (and >300 co-authors including Ryan C. Briggs). (accepted). Reproducibility and Robustness of Economics and Political Science Research. *Nature*.
 
 Aczel, Balazs (and >400 co-authors including Ryan C. Briggs). (accepted). Investigating the Analytical Robustness of the Social and Behavioural Sciences. *Nature*.
 
@@ -18,7 +18,7 @@ Heinzel, Mirko, Weaver, Cate, and Briggs, Ryan C. (2025). [Incentivizing Respons
 
 Briggs, Ryan C. (2024). [Beliefs, Values, and Practices in Development Studies](papers/Briggs (2024) Beliefs.pdf). *Journal of Development Studies*, 60(10), 1493–1510.
 
-Briggs, Ryan C. (2021). [Why does aid not target the poorest?](papers/Briggs (2021) Aid poorest.pdf). *International Studies Quarterly*, 65(3), 739–752.
+Briggs, Ryan C. (2021). [Why does aid not target the poorest?](papers/Briggs (2021) Aid poorest.pdf) *International Studies Quarterly*, 65(3), 739–752.
 
 Briggs, Ryan C. (2020). [Results from single-donor analyses of project aid success seem to generalize pretty well across donors](papers/Briggs (2020) Generalize.pdf). *Review of International Organizations*, 15(4), 947–963.
 
@@ -28,7 +28,7 @@ Briggs, Ryan C. (2018). [Leaving no one behind? A new test of subnational aid ta
 
 Briggs, Ryan C. (2018). [Poor targeting: A gridded spatial analysis of the degree to which aid reaches the poor in Africa](papers/Briggs (2018) Poor Targeting.pdf). *World Development*, 103, 133–148.
 
-Briggs, Ryan C. (2017). [Does foreign aid target the poorest?](papers/Briggs (2017) Aid Target Poorest.pdf). *International Organization*, 71(1), 187–206.
+Briggs, Ryan C. (2017). [Does foreign aid target the poorest?](papers/Briggs (2017) Aid Target Poorest.pdf) *International Organization*, 71(1), 187–206.
 
 Briggs, Ryan C. (2015). [The influence of aid changes on African election outcomes](papers/Briggs (2015) Election Outcomes.pdf). *International Interactions*, 41(2), 201–225.
 
@@ -63,18 +63,18 @@ Briggs, Ryan C. (2024). [Aid Targeting](https://www.elgaronline.com/edcollchap/b
 
 ## Work in Progress
 
-Briggs, Ryan C. and Vivalt, Eva. [Are Impact Evaluations in Development Economics Underpowered?](https://osf.io/8hkc5/).
+Briggs, Ryan C. and Vivalt, Eva. [Are Impact Evaluations in Development Economics Underpowered?](https://osf.io/8hkc5/)
 
 Briggs, Ryan C., Mellon, Jonathan, and Arel-Bundock, Vincent. [It must be very hard to publish null results](https://osf.io/preprints/socarxiv/zr5vf_v1).
 
 ## Selected Other Writing
 
-Briggs, Ryan C. (2025). [Can We Trust Social Science Yet?](https://asteriskmag.com/issues/10/can-we-trust-social-science-yet). *Asterisk*.
+Briggs, Ryan C. (2025). [Can We Trust Social Science Yet?](https://asteriskmag.com/issues/10/can-we-trust-social-science-yet) *Asterisk*.
 
 Briggs, Ryan C. and Chris Rutty. (2023). [Why we should declare a formal 'Smallpox Eradication Day'](https://ottawacitizen.com/opinion/briggs-and-rutty-why-we-should-declare-a-formal-smallpox-eradication-day/wcm/1d73235f-4e5d-467c-b612-9ffd48d0d7fb/amp/). *Ottawa Citizen*.
 
-Briggs, Ryan C. and Dario Sidhu. (2021). [It's giving season — how do you ensure your charitable donations will be used effectively?](https://www.thestar.com/opinion/contributors/2021/11/29/its-giving-season-how-do-you-ensure-your-charitable-donations-will-be-used-effectively.html). *The Toronto Star*.
+Briggs, Ryan C. and Dario Sidhu. (2021). [It's giving season — how do you ensure your charitable donations will be used effectively?](https://www.thestar.com/opinion/contributors/2021/11/29/its-giving-season-how-do-you-ensure-your-charitable-donations-will-be-used-effectively.html) *The Toronto Star*.
 
-Briggs, Ryan C. (2021). [Why does aid not target the poorest?](https://voxdev.org/topic/institutions-political-economy/why-does-aid-not-target-poorest). *VoxDev*.
+Briggs, Ryan C. (2021). [Why does aid not target the poorest?](https://voxdev.org/topic/institutions-political-economy/why-does-aid-not-target-poorest) *VoxDev*.
 
 Briggs, Ryan C. (2018). [Millions of Americans as destitute as the world's poorest? Don't believe it](https://www.vox.com/the-big-idea/2018/2/1/16959634/millions-americans-destitute-2-day-worlds-poorest-deaton-aid). *Vox.com*.

@@ -2,11 +2,14 @@
 
 /* Clean up link colors */
 a {
-  color: #c0392b;
-  text-decoration: none;
+  color: #9e3d2c;
+  text-decoration: underline;
+  text-decoration-color: rgba(158, 61, 44, 0.35);
+  text-underline-offset: 2px;
 }
 a:hover {
-  text-decoration: underline;
+  color: #c9952d;
+  text-decoration-color: #c9952d;
 }
 
 /* Publication list styling */
