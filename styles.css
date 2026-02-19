@@ -1,22 +1,5 @@
 /* Minimal custom styles - placeholder for future theming */
 
-/* Clean up link colors */
-a {
-  color: #9e3d2c;
-  text-decoration: underline;
-  text-decoration-color: rgba(158, 61, 44, 0.35);
-  text-underline-offset: 2px;
-}
-a:visited,
-a:active,
-a:any-link {
-  color: #9e3d2c;
-}
-a:hover {
-  color: #c9952d;
-  text-decoration-color: #c9952d;
-}
-
 /* Publication list styling */
 .pub-entry {
   margin-bottom: 0.8em;

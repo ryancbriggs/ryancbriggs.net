@@ -24,15 +24,13 @@ Caviola, L., Schubert, S., Teperman, E., Moss, D., Greenberg, S., & Faber, N. S.
 
 [80,000 hours](https://80000hours.org/2023/02/how-much-do-solutions-differ-in-effectiveness/) also has a useful page pulling together many cost-effectiveness estimates with discussion and caveats.
 
-### Global income inequality and Singer's pond
-
-In progress.
-
-### Statistics
-
-In progress.
-
 ## Syllabi
+
+**IDEV 4600 (2025)**: [Advocating and Effecting Change](files/IDEV%204600%20Fall%202025%20Syllabus.pdf).
+This was a senior seminar course where students decided where I would donate $2,000. To make an informed choice, they learned about philosophy, cost-benefit analysis, and some data analysis skills, then did group presentations before everyone voted on where I would donate.
+
+**IDEV 3000 (2024)**: [Measurement and Dynamics of Poverty and Inequality](files/IDEV%203000%20Fall%202024%20Syllabus.pdf).
+This is a course on the measurement and dynamics of poverty and inequality that I taught using [Martin Ravallion's book](https://academic.oup.com/book/10927).
 
 **IDEV 3400 (2021)**: [Managing and Evaluating Change in Development](files/IDEV-3400-Syllabus-W2021.pdf).
 This is an undergraduate applied course on project evaluation. It covers basics of: Tidy R, statistics for RCTs, RCT basics.
