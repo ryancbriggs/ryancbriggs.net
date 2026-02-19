@@ -122,6 +122,12 @@ a {
   transition: all 0.15s ease;
 }
 
+a:visited,
+a:active,
+a:any-link {
+  color: $rust;
+}
+
 a:hover {
   color: $ochre;
   text-decoration-color: $ochre;
