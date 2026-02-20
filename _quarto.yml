@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - files/**
   pre-render:
     - bash -c "cd cv && python3 build.py && python3 build.py --years 5 && cp output/cv.pdf ../files/cv.pdf"
     - python3 _scripts/generate_research.py
