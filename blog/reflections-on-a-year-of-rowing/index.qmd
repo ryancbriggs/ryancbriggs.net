@@ -17,7 +17,7 @@ I thought about it for a bit and came up with 4 criteria for my future exercise 
 3. I could get a good workout in 20 min
 4. It would fit in my (small) basement
 
-I asked on Twitter and the replies quickly converged on either putting a pool in my basement (unlikely) or buying an erg. After borrowing a friend’s erg for a week, I settled on that and bought the standard C2 erg that everyone seems to recommend. 
+I asked on Twitter and the replies quickly converged on either putting a pool in my basement (unlikely) or buying an erg. After borrowing a friend’s erg for a week, I settled on that and bought the [standard C2 erg](https://shop.concept2.com/rowergs/298-model-d-with-pm5.html) that everyone seems to recommend. 
 
 ## Sticking to it
 
@@ -25,7 +25,7 @@ I’ve made half-hearted efforts at setting up an exercise habit before, but thi
 
 I told everyone I was going to row regularly. This included talking about rowing a decent amount on social media. My goal here was to make it more embarrassing to fail.
 
-I wrote a series of R scripts to visualize the rowing data from my erg and health data from my Apple Watch. I thought I’d find the health results motivating and I’d find the process rewarding because I like messing around with data. Rowing now wasn’t just exercise, it was adding a row to my dataset.
+I wrote a [series of R scripts](https://github.com/ryancbriggs/concept2-AH) to visualize the rowing data from my erg and health data from my Apple Watch. I thought I’d find the health results motivating and I’d find the process rewarding because I like messing around with data. Rowing now wasn’t just exercise, it was adding a row to my dataset.
 
 I used the data above to motivate myself. For example, I tracked my “cost per use of the erg.” One nice thing about this number is that it drops faster when your number of uses is lower (and so the habit isn’t as developed). I did not want to have just wasted like $1000 on exercise equipment I didn’t use, so seeing this number drop was motivating. Later, I started tracking my 5k and 2k times and found that motivating as well.
 
