@@ -1,0 +1,151 @@
+---
+title: "The problems with selecting on significance"
+date: "2026-02-25"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2026/2/25/the-problems-with-selecting-on-significance
+---
+
+Current research production practices in the social sciences put a premium on statistically significant results. A common gloss on this is that our goal is to *discover things,* so journals prioritize results that are statistically distinguishable from zero. Authors know this and so often don’t even submit null results to journals. The end result is that between 2010 and 2024 [94% of all statistical articles in political science claimed to reject a null hypothesis](https://osf.io/preprints/socarxiv/zr5vf_v1).
+
+This might seem great---we’re discovering a lot!---but I worry that this research production ecosystem has major problems. In this post I’m going to explain why and when filtering research based on statistical significance, also known as selection on significance (SOS), is a problem. I will also propose and critique one alternative and discuss a final idea that could help ameliorate these issues. 
+
+My starting point is that I would like published research coefficients to be unbiased. If a published result has an effect of 1, then I would like to (correctly) believe that if I were to somehow average across all (published and unpublished) research conducted on this topic with similar setups then I would get something like 1. Ideally, this would also be informative of future replications of the research too.
+
+This will later become relevant so it's worth me flagging that we have good reason to believe that many of the statistical tests in [political science](https://www.journals.uchicago.edu/doi/full/10.1086/734279) and [economics](https://onlinelibrary.wiley.com/doi/abs/10.1111/ecoj.12461) and [beyond](https://psycnet.apa.org/doi/10.1037/bul0000169) have low power to detect effect sizes that typically exist. It’s hard to unpack why this is, but I believe it is due to both the fact that we tend to study small and highly variable effects and also that we don’t worry so much about variance. 
+
+Most of what I'm going to present below is logical argument, but for people who want more clarity I have a [simulation](#sim) that more clearly shows my thinking at the end for people who like that kind of thing. It's just a toy model and you should not anchor on any parameter value or result. Rather, it's there to more clearly communicate how I'm thinking about things and so anyone else can modify it and see what they get. Finally, [none of this is new](https://statmodeling.stat.columbia.edu/?s=selection+on+significance&submit=Search) but I hope that there is value in explaining all of this in plain language in one place.
+
+## Selection on Significance
+
+Let’s think about what happens if you conduct many hypothesis tests and then filter them based on whether or not a p-value crossed a threshold like 0.05. The figure below shows a null distribution and a sampling distribution. The x-axis shows standardized effect sizes and the sampling distribution is centered at 1.96, meaning that there is a 50% chance of a draw from the sampling distribution ending up in the shaded blue rejection zone of the null. This is a test with 50% power.
+
+```{r, dev='svg', dev.args=list(bg="transparent")}
+#| label: power50
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-align: center
+#| fig-height: 5.5
+#| fig-width: 12
+library(ggplot2)
+
+ggplot(data.frame(x = c(-4, 6)), aes(x = x)) +
+  # Null distribution
+  stat_function(fun = dnorm, n = 500, color = "blue", linewidth = 1,
+                args = list(mean = 0, sd = 1)) +
+  annotate("segment", x = 0, y = 0, xend = 0, yend = 0.399, color = "blue") +
+  # Null rejection regions (alpha = 0.05)
+  stat_function(fun = dnorm, n = 500,
+                args = list(mean = 0, sd = 1), xlim = c(1.96, 6),
+                geom = "area", fill = "blue", alpha = .3) +
+  stat_function(fun = dnorm, n = 500,
+                args = list(mean = 0, sd = 1), xlim = c(-4, -1.96),
+                geom = "area", fill = "blue", alpha = .3) +
+  # Sampling distribution centered at 1.96 (50% power)
+  stat_function(fun = dnorm, n = 500, color = "red", linewidth = 1,
+                args = list(mean = 1.96, sd = 1)) +
+  stat_function(fun = dnorm, n = 500,
+                args = list(mean = 1.96, sd = 1), xlim = c(1.96, 6),
+                geom = "area", fill = "red", alpha = .3) +
+  annotate("segment", x = 1.96, y = 0, xend = 1.96, yend = 0.399, color = "red") +
+  # Labels
+  annotate("text", x = -1.75, y = .32, label = "Null distribution",
+           color = "blue", size = 5) +
+  annotate("text", x = 4, y = .32, label = "Sampling distribution",
+           color = "red", size = 5) +
+  labs(x = "Effect size (standardized)", y = "") +
+  theme_minimal(base_size = 16) +
+  theme(axis.text.y = element_blank(),
+        plot.background = element_rect(fill = "transparent")
+)
+```
+
+If we draw from the sampling distribution many times, the average of all of our results should be 1.96. However, if before we average them we remove the insignificant results then we will end up with a number that is about 40% larger. SOS is removing numbers near zero, and so biasing the average away from zero.
+
+This is an especially pernicious kind of bias, because it exists as a filter *above* tests (or articles). This means that even if there is perfect research practice on the part of the people conducting the tests, and even if a reader knows that they should read across literatures rather than trust a single article, they would still end up with a best guess mean that is biased away from zero.
+
+If power is low, then the two distributions overlap more. This makes the bias more severe and in extreme cases it means that some significant results may even have the wrong sign. As power increases, the bias goes down and all this matters less.
+
+Political science tends to have both [very low power](https://www.journals.uchicago.edu/doi/full/10.1086/734279) relative to true effects and [lots of selection on significance](https://osf.io/preprints/socarxiv/zr5vf_v1). This implies that our results are systematically biased away from zero. This is empirically [what we find](https://www.journals.uchicago.edu/doi/full/10.1086/734279) when we look. 
+
+Given how much effort political science and economics have spent on having unbiased tests within papers---this was the entire point of the credibility revolution!---one might expect that a lot of people will be upset about the idea that we have created a research production ecosystem that systematically biases our published literature. It at least upsets me. What can we do about this?
+
+## Selection on Precision 
+
+One alternative to SOS is to select results based on *precision* (small standard errors, or you can think of it as tighter confidence intervals). Because this selection process is not mechanically related to the magnitude or sign of coefficients, it will not produce biased coefficients.[^sop_bias] Thus, if we select on precision then we can take coefficients at face value and meta-analysis will work.
+
+Selecting on precision is also intuitive, as it's selecting more informative tests. Very often when I talk about the importance of not screening out null results someone will (correctly) tell me that a noisy null is not very informative of effects. This is true, but of course the problem with the current system is that we regularly publish noisy but significant tests (which are likely extreme and "unlucky" draws). Selecting on precision applies the same rule to tests regardless of the coefficient value: pick tests with more precision.
+
+[^sop_bias]: []{#sop-bias-note} SOP avoids SOS’s built-in truncation bias, but it could filter out estimands of interest. If high-precision studies cluster in particular settings or specifications, publication under SOP will over-represent those contexts. As a result, the published estimates may reflect where precise estimates are easiest to obtain, rather than some population parameter we may care more about.
+
+There are at least two problems with this approach. The first is that, unlike SOS, we do not have a scale-free way to define precision. In other words, I can't give a number like 0.05 to use for easy selection. This means that what counts as "precise enough" to be prioritized for publication will vary by research question and be up to the judgement of academics. I have no way around this. A world with SOP is a world where expert judgement is used more heavily than a world with SOS. I've framed this as a problem but I expect many people will see it as an advantage.
+
+The second issue is more clearly a problem. If we produce many tests and then filter them based on precision, then the tests that make it through the filter will not have biased coefficients but they will have downwardly biased standard errors. This means that the confidence intervals from these tests will have undercoverage (the 95% intervals published under this scheme will be expected to cover the true value less than 95% of the time). This is a direct result of selecting based on precision and is unavoidable under this system.
+
+One thing, however, that might make this bullet easier to bite is that SOS also biases standard errors down. This is because the test statistic is a ratio of coefficient and standard error and so selecting on significance filters for larger coefficients *but also smaller standard errors.* The relative magnitude of this bias depends on many factors so I can't say that one is worse than the other, but if we ultimately care about the coverage of confidence intervals then SOS has an additional demerit. Because coefficients under SOS are biased away from zero, the intervals are also biased away from zero. Thus, it is possible to have a situation where standard errors are more biased under SOP than SOS and yet SOS has worse coverage than SOP. I show this in my [simulation](#sim).
+
+## Registered Reports
+
+Perhaps you want unbiased coefficients and unbiased standard errors. What can you do then?
+
+The most attractive way to get both is with [registered reports](https://www.cos.io/initiatives/registered-reports). These are essentially tight pre-registration plans that are peer reviewed and accepted for publication before the study is conducted. They do not work for all kinds of research and the planning to do them well is onerous, but they offer unbiased coefficients and unbiased standard errors.
+
+## Conclusions
+
+The main takeaway is simple: we should not filter research based on statistical significance. With low power, SOS inflates effects and gives confidence intervals that look more certain than they are. SOP is an improvement, but it is sadly not a free lunch. It also has confidence intervals that under-cover and filtering in this way may make it so that the estimands that we estimate are [not a good fit](#sop-bias-note) to the population parameters we care most about. Registered reports are ideal when possible, but many forms of research do not lend themselves to the registered report format.
+
+So one realistic takeaway is that we should probably be using registered reports when possible, and otherwise move away from SOS. SOP seems like a good (if imperfect) alternative to SOS.
+
+## The simulation {#sim}
+
+This is a basic simulation, originally made by [Vincent Arel-Bundock](https://arelbundock.com), and then vandalized by me to explore SOS and SOP. It loops a simple two-arm experiment and then presents bias ratios in the estimate and standard error and confidence interval coverage for selection regimes of: no selection, SOS, and SOP. It's a toy model used mostly to explore and explain my intuitions. Do not over-index on any specific number.
+
+```{r}
+#| message: false
+#| warning: false
+set.seed(123)
+library(marginaleffects)
+
+sample_size <- 100
+tau <- 0.30 # true treatment effect
+
+draw <- function(N, tau) {
+  D <- rbinom(N, 1, 0.5) # two arms: 0 = control, 1 = treatment
+  e <- rnorm(N, 0, 1)
+  Y <- tau * D + e
+  data.frame(D = D, e = e, Y = Y)
+}
+
+fit <- function(d) {
+  model <- lm(Y ~ D, data = d)
+  hypotheses(model)[2, ] |> as.data.frame()
+}
+
+results <- do.call(rbind, replicate(1000, fit(draw(sample_size, tau)), simplify = FALSE))
+
+selection_sets <- list(
+  `No selection` = results,
+  `SOS` = subset(results, p.value < 0.05),
+  `SOP` = subset(results, conf.high - conf.low < .8)
+)
+
+summarize_selection <- function(d, full, tau) {
+  coverage <- mean(d$conf.low <= tau & tau <= d$conf.high)
+  c(
+    `Estimate bias ratio` = mean(d$estimate) / tau,
+    `SE bias ratio` = mean(d$std.error) / mean(full$std.error),
+    `CI coverage` = coverage
+  )
+}
+
+results_table <- do.call(cbind, lapply(selection_sets, summarize_selection, full = results, tau = tau))
+results_table <- round(results_table, 2)
+results_table <- as.data.frame(results_table)
+
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::kable(results_table, caption = "Selection-induced bias ratios and CI undercoverage")
+} else {
+  print(results_table)
+}
+```
