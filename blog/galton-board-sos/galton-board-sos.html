@@ -6,7 +6,7 @@
 <title>Galton Board – Selection on Significance</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: transparent; }
+  html, body { background: transparent; overflow: hidden; }
   body {
     font-family: system-ui, -apple-system, sans-serif;
     display: flex;
@@ -73,8 +73,8 @@
   .summary-row {
     position: absolute;
     top: 10px;
-    left: 12px;
-    right: 12px;
+    left: 16px;
+    right: 16px;
     z-index: 3;
     pointer-events: none;
     display: flex;
@@ -85,9 +85,9 @@
     padding: 0;
   }
   .summary-block {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: #6b7280;
-    line-height: 1.3;
+    line-height: 1.25;
     white-space: nowrap;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-variant-numeric: tabular-nums;
@@ -130,7 +130,7 @@
   var ROWS = 23, BINS = ROWS + 1;
 
   var BASE_W = 920;
-  var scByW = (Math.min(860, window.innerWidth - 24)) / BASE_W;
+  var scByW = (Math.min(820, window.innerWidth - 24)) / BASE_W;
   var sc = Math.max(scByW, 0.34);
   var W = Math.round(BASE_W * sc);
   var CX = W / 2;
