@@ -1,5 +1,5 @@
 ---
-title: "Selection on significance: an interactive Galton board"
+title: "A Galton board with selection on significance"
 date: "2026-02-27"
 author: "Ryan Briggs"
 aliases:
