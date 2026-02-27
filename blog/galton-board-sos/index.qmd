@@ -1,0 +1,19 @@
+---
+title: "Selection on significance: an interactive Galton board"
+date: "2026-02-27"
+author: "Ryan Briggs"
+aliases:
+  - /blog/2026/2/27/selection-on-significance-galton-board
+---
+
+For a while now I've wanted to [modify a physical Galton board](https://bsky.app/profile/ryancbriggs.net/post/3m4qjo6b42s2g) to show [selection on significance](https://ryancbriggs.net/blog/the-problems-with-selecting-on-significance/). I was never able to get around to it, so instead I made a virtual version.
+
+Below is a normal [Galton board](https://en.wikipedia.org/wiki/Galton_board) where balls fall from the top and each peg gives a 50% chance of going left or right (`p(right)=0.5`). What makes this board unique is the **Selection on Significance** slider, which controls the probability that non-significant results fall out of the bottom of the board. You can also switch **Significance Test** between **two-tailed** and **one-tailed (right)** cutoffs.
+
+```{=html}
+<iframe src="galton-board-sos.html" width="100%" height="820" style="border:none; border-radius:14px; max-width:900px; display:block; margin:0 auto; background:transparent;"></iframe>
+```
+
+You can explore how different levels and forms of selection on significance change the distribution. This little toy does not illustrate all of the issues related to [selection on significance](https://ryancbriggs.net/blog/the-problems-with-selecting-on-significance/), but I think it is a nice intuition pump.
+
+I expect I'll use this in my teaching, and I hope other people find it useful too.

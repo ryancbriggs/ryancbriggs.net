@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galton Board – Selection on Significance</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 12px;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 3px; }
+  .sub { font-size: 0.78rem; color: #999; margin-bottom: 14px; text-align: center; max-width: 460px; line-height: 1.45; }
+  .controls {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 22px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cg { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .cg label { font-size: 0.65rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
+  .cg .val { font-size: 0.85rem; font-weight: 600; min-width: 40px; text-align: center; }
+  .cg.sos label { color: #7c3aed; }
+  .cg.sos .val { color: #7c3aed; }
+  .cg.mode label { color: #2563eb; }
+  input[type=range] { width: 140px; accent-color: #7c3aed; cursor: pointer; }
+  button {
+    background: #18181b; color: #fff;
+    border: none; border-radius: 8px;
+    padding: 9px 24px; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: background 0.15s;
+    font-family: inherit; min-width: 80px;
+  }
+  button:hover { background: #3f3f46; }
+  button.running { background: #dc2626; }
+  button.running:hover { background: #b91c1c; }
+  button.mode-btn {
+    min-width: 110px;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    background: #fff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+  button.mode-btn:hover { background: #f8fafc; }
+  button.mode-btn.one-tailed {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #93c5fd;
+  }
+  .meta {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    color: #8a8a8a;
+    text-align: center;
+    max-width: 900px;
+    line-height: 1.35;
+    padding: 0 8px;
+  }
+  .board-wrap { position: relative; display: inline-block; width: fit-content; }
+  .summary-row {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    z-index: 3;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+  }
+  .summary-block {
+    font-size: 0.72rem;
+    color: #6b7280;
+    line-height: 1.3;
+    white-space: nowrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .summary-block.right { text-align: right; }
+  .summary-block .k { color: #8b8b8b; }
+  .summary-block .v { color: #5f6368; }
+  canvas { border-radius: 14px; box-shadow: 0 1px 5px rgba(0,0,0,0.07); display: block; background: #fff; }
+</style>
+</head>
+<body>
+<h1>Galton Board</h1>
+<p class="sub">Balls bounce randomly, building a bell curve &mdash; unless non-significant results are filtered out</p>
+<div class="controls">
+  <div class="cg sos">
+    <label>Selection on Significance</label>
+    <input type="range" id="sosSlider" min="0" max="100" value="0" step="5">
+    <span class="val" id="sosVal">Off</span>
+  </div>
+  <div class="cg mode">
+    <label>Significance Test</label>
+    <button id="tailBtn" class="mode-btn" type="button">Two-tailed</button>
+  </div>
+  <button id="btn">Start</button>
+</div>
+<div class="meta" id="alphaNote"></div>
+<div class="board-wrap">
+  <canvas id="c"></canvas>
+  <div class="summary-row">
+    <div class="summary-block left" id="countsHud"></div>
+    <div class="summary-block right" id="metricsHud"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+
+  // ── Layout ─────────────────────────────────────────────────────────────
+  var ROWS = 23, BINS = ROWS + 1;
+
+  var BASE_W = 920;
+  var scByW = (Math.min(860, window.innerWidth - 24)) / BASE_W;
+  var sc = Math.max(scByW, 0.34);
+  var W = Math.round(BASE_W * sc);
+  var CX = W / 2;
+
+  var PS = (W - sc * 26) / BINS; // Keep bins equal-width and fully on canvas.
+  var PEG_R = Math.max(sc * 1.3, PS * 0.18);
+  var BALL_R = Math.max(sc * 1.1, PS * 0.12);
+  var BALL_D = BALL_R * 2;
+  var PEG_Y0 = sc * 36;
+  var ROW_H = Math.max(sc * 6.2, PS * 0.38);
+  var GAP = Math.max(sc * 18, PS * 1.0);
+  var BIN_TOP = PEG_Y0 + (ROWS - 1) * ROW_H + GAP;
+  var BIN_H = Math.max(sc * 205, BALL_D * 26);
+  var BIN_BOTTOM = BIN_TOP + BIN_H;
+  var H = Math.ceil(BIN_BOTTOM + Math.max(sc * 54, BALL_D * 9));
+
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  // ── Stacking geometry ──────────────────────────────────────────────────
+  var BIN_INNER = PS - Math.max(sc * 1.4, PS * 0.12);
+  var BPR = Math.max(1, Math.floor(BIN_INNER / BALL_D)); // balls per row
+
+  var ALPHA = 0.10;
+  var tailMode = 'two';
+  function isTwoTailed() { return tailMode === 'two'; }
+  function nChooseK(n, k) {
+    if (k < 0 || k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    k = Math.min(k, n - k);
+    var c = 1;
+    for (var i = 1; i <= k; i++) c = c * (n - k + i) / i;
+    return c;
+  }
+  function buildBinProbs() {
+    var probs = [];
+    var denom = Math.pow(2, ROWS);
+    for (var i = 0; i < BINS; i++) probs.push(nChooseK(ROWS, i) / denom);
+    return probs;
+  }
+  var binProbs = buildBinProbs();
+  function chooseCutoffs(alpha) {
+    var bestTwo = { diff: Infinity, left: 0, rate: 0 };
+    for (var a = 0; a <= Math.floor(ROWS / 2); a++) {
+      var leftTail = 0;
+      var rightTail = 0;
+      for (var i = 0; i <= a; i++) leftTail += binProbs[i];
+      for (var j = ROWS - a; j <= ROWS; j++) rightTail += binProbs[j];
+      var twoRate = leftTail + rightTail;
+      var twoDiff = Math.abs(twoRate - alpha);
+      if (twoDiff < bestTwo.diff) bestTwo = { diff: twoDiff, left: a, rate: twoRate };
+    }
+
+    var bestOne = { diff: Infinity, right: 0, rate: 0 };
+    for (var b = 0; b <= ROWS; b++) {
+      var oneRate = 0;
+      for (var k = b; k <= ROWS; k++) oneRate += binProbs[k];
+      var oneDiff = Math.abs(oneRate - alpha);
+      if (oneDiff < bestOne.diff) bestOne = { diff: oneDiff, right: b, rate: oneRate };
+    }
+    return {
+      twoLeft: bestTwo.left,
+      twoRight: ROWS - bestTwo.left,
+      oneRight: bestOne.right,
+      twoRate: bestTwo.rate,
+      oneRate: bestOne.rate
+    };
+  }
+  var CUTS = chooseCutoffs(ALPHA);
+  function isSig(bin) {
+    return isTwoTailed()
+      ? (bin <= CUTS.twoLeft || bin >= CUTS.twoRight)
+      : (bin >= CUTS.oneRight);
+  }
+  function binToProb(bin) { return bin / ROWS; }
+  function fmt3(x) { return (Math.round(x * 1000) / 1000).toFixed(3); }
+  function pct1(x) { return (x * 100).toFixed(1) + '%'; }
+  function statsFromCounts(counts, total) {
+    if (!total) return { mean: 0, rejectShare: 0 };
+    var meanSum = 0;
+    var rejectCount = 0;
+    for (var i = 0; i < counts.length; i++) {
+      meanSum += counts[i] * binToProb(i);
+      if (isSig(i)) rejectCount += counts[i];
+    }
+    return { mean: meanSum / total, rejectShare: rejectCount / total };
+  }
+  function renderTally(landedCount, retainedCount, filteredCount, trueStats, pubStats) {
+    var retainedPct = landedCount > 0 ? Math.round(retainedCount / landedCount * 100) : 0;
+    var filteredPct = landedCount > 0 ? Math.round(filteredCount / landedCount * 100) : 0;
+    countsHudEl.innerHTML =
+      '<div><span class="k">dropped:</span> <span class="v">' + landedCount + '</span></div>' +
+      '<div><span class="k">retained:</span> <span class="v">' + retainedCount + ' (' + retainedPct + '%)</span></div>' +
+      '<div><span class="k">filtered out:</span> <span class="v">' + filteredCount + ' (' + filteredPct + '%)</span></div>';
+    metricsHudEl.innerHTML =
+      '<div><span class="k">unfiltered mean:</span> <span class="v">' + fmt3(trueStats.mean) + '</span></div>' +
+      '<div><span class="k">filtered mean:</span> <span class="v">' + fmt3(pubStats.mean) + '</span></div>' +
+      '<div><span class="k">unfiltered reject:</span> <span class="v">' + pct1(trueStats.rejectShare) + '</span></div>' +
+      '<div><span class="k">filtered reject:</span> <span class="v">' + pct1(pubStats.rejectShare) + '</span></div>';
+  }
+  function boardLeftX() { return binCX(0) - PS / 2; }
+  function boardRightX() { return binCX(BINS - 1) + PS / 2; }
+  function leftCutX() {
+    return isTwoTailed() ? (binCX(CUTS.twoLeft) + PS / 2) : null;
+  }
+  function rightCutX() {
+    var rightBin = isTwoTailed() ? CUTS.twoRight : CUTS.oneRight;
+    return binCX(rightBin) - PS / 2;
+  }
+
+  function pegX(r, c) { return CX + (c - r / 2) * PS; }
+  function pegY(r)    { return PEG_Y0 + r * ROW_H; }
+  function binCX(i)   { return CX + (i - (BINS - 1) / 2) * PS; }
+  function smoothstep(t) { return t * t * (3 - 2 * t); }
+  function easeIn(t)     { return t * t; }
+
+  function stackPos(bin, index) {
+    var row = Math.floor(index / BPR);
+    var col = index % BPR;
+    var cx  = binCX(bin);
+    var startX = cx - ((BPR - 1) * BALL_D) / 2;
+    var y = BIN_BOTTOM - row * BALL_D - BALL_R - sc * 1.5;
+    return { x: startX + col * BALL_D, y: Math.max(y, BIN_TOP + BALL_R) };
+  }
+
+  // ── Ball ───────────────────────────────────────────────────────────────
+  function Ball() {
+    this.done = false;
+    this.hitBurst = 0;
+    this.counted = false;
+    // Settling (published ball dropping to stack position)
+    this.settling = false;
+    this.settled  = false;
+    this.settleT  = 0;
+    this.settleFromX = 0; this.settleFromY = 0;
+    this.settleToX   = 0; this.settleToY   = 0;
+    // Filtering (non-sig ball falling through trapdoor)
+    this.filtering  = false;
+    this.filterDone = false;
+    this.filterT    = 0;
+    this.filterFromY = 0;
+
+    var col = 0, rights = 0;
+    this.wps = [];
+    this.wps.push({ x: CX, y: sc * 4, peg: false });
+    for (var r = 0; r < ROWS; r++) {
+      this.wps.push({ x: pegX(r, col), y: pegY(r), peg: true });
+      if (Math.random() < 0.5) { col++; rights++; }
+    }
+    this.bin = rights;
+    this.wps.push({ x: binCX(rights), y: BIN_TOP + sc * 6, peg: false });
+    this.si = 0;
+    this.st = 0;
+    this.x = this.wps[0].x;
+    this.y = this.wps[0].y;
+  }
+
+  Ball.prototype.update = function (dt) {
+    // ── Settling to stack position ──
+    if (this.settling) {
+      this.settleT += dt / 220;
+      if (this.settleT >= 1) {
+        this.settling = false;
+        this.settled = true;
+        this.x = this.settleToX;
+        this.y = this.settleToY;
+        settled[this.bin].push({ x: this.settleToX, y: this.settleToY });
+      } else {
+        var t = easeIn(this.settleT);
+        this.x = this.settleFromX + (this.settleToX - this.settleFromX) * t;
+        this.y = this.settleFromY + (this.settleToY - this.settleFromY) * t;
+      }
+      return;
+    }
+    // ── Falling through trapdoor ──
+    if (this.filtering && !this.filterDone) {
+      this.filterT += dt / 550;
+      if (this.filterT >= 1) {
+        this.filterDone = true;
+      } else {
+        this.y = this.filterFromY + easeIn(this.filterT) * (H - this.filterFromY + sc * 30);
+      }
+      return;
+    }
+    if (this.done || this.settled) return;
+    if (this.hitBurst > 0) this.hitBurst = Math.max(0, this.hitBurst - dt / 140);
+
+    var SEG_MS = 170;
+    this.st += dt / SEG_MS;
+    if (this.st >= 1) {
+      this.si++;
+      this.st -= 1;
+      if (this.si >= this.wps.length - 1) {
+        var last = this.wps[this.wps.length - 1];
+        this.x = last.x;
+        this.y = last.y;
+        this.done = true;
+        return;
+      }
+      if (this.wps[this.si].peg) this.hitBurst = 1;
+    }
+    var from = this.wps[this.si];
+    var to   = this.wps[this.si + 1];
+    var t    = Math.min(this.st, 1);
+    this.x = from.x + (to.x - from.x) * smoothstep(t);
+    this.y = from.y + (to.y - from.y) * easeIn(t);
+    if (from.peg && t < 0.4) {
+      this.y -= Math.sin((t / 0.4) * Math.PI) * sc * 14;
+    }
+  };
+
+  Ball.prototype.draw = function () {
+    if (this.settled || this.filterDone) return;
+    if (this.done && !this.settling && !this.filtering) return;
+
+    var opacity = 1;
+    if (this.filtering) {
+      opacity = 1 - Math.max(0, this.filterT - 0.4) / 0.6;
+      if (opacity <= 0) return;
+    }
+
+    ctx.save();
+    ctx.globalAlpha = opacity;
+
+    // Glow ring on peg hit
+    if (!this.filtering && !this.settling && this.hitBurst > 0
+        && this.wps[this.si] && this.wps[this.si].peg) {
+      var ring = PEG_R + (1 - this.hitBurst) * sc * 10;
+      ctx.beginPath();
+      ctx.arc(this.wps[this.si].x, this.wps[this.si].y, ring, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(247,111,92,' + (this.hitBurst * 0.4) + ')';
+      ctx.lineWidth = sc * 1.8;
+      ctx.stroke();
+    }
+
+    // Ball
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, BALL_R, 0, Math.PI * 2);
+    ctx.fillStyle = '#e8604c';
+    ctx.fill();
+
+    ctx.restore();
+  };
+
+  // ── State ──────────────────────────────────────────────────────────────
+  var balls = [], settled = [];
+  var pubCounts = [], trueCounts = [], maxTrue = 1;
+  var raf = null, lastTs = null;
+  var landed = 0, published = 0, filtered = 0;
+  var dropping = false, spawnAccum = 0;
+  var SPAWN_INTERVAL = 70;
+
+  var sosSlider = document.getElementById('sosSlider');
+  var sosValEl  = document.getElementById('sosVal');
+  var tailBtn   = document.getElementById('tailBtn');
+  var btn       = document.getElementById('btn');
+  var alphaNoteEl = document.getElementById('alphaNote');
+  var countsHudEl = document.getElementById('countsHud');
+  var metricsHudEl = document.getElementById('metricsHud');
+
+  sosSlider.oninput = function () {
+    var v = parseInt(sosSlider.value);
+    sosValEl.textContent = v === 0 ? 'Off' : v + '%';
+  };
+
+  function updateTailBtn() {
+    var oneTailed = !isTwoTailed();
+    tailBtn.textContent = oneTailed ? 'One-tailed (right)' : 'Two-tailed';
+    tailBtn.classList.toggle('one-tailed', oneTailed);
+    tailBtn.setAttribute('aria-pressed', oneTailed ? 'true' : 'false');
+    var modeName = oneTailed ? 'one-tailed (right)' : 'two-tailed';
+    var modeRate = oneTailed ? CUTS.oneRate : CUTS.twoRate;
+    alphaNoteEl.textContent = 'Hard cutoffs with alpha=' + ALPHA.toFixed(2) +
+      ': expected unfiltered rejection rate at SOS=0 is about ' + pct1(modeRate) +
+      ' in ' + modeName + ' mode.';
+  }
+
+  tailBtn.onclick = function () {
+    tailMode = isTwoTailed() ? 'one' : 'two';
+    updateTailBtn();
+    stopDrop();
+    resetState();
+    render();
+  };
+
+  function resetState() {
+    balls = []; settled = [];
+    pubCounts = []; trueCounts = [];
+    for (var i = 0; i < BINS; i++) {
+      pubCounts.push(0); trueCounts.push(0); settled.push([]);
+    }
+    maxTrue = 1;
+    landed = 0; published = 0; filtered = 0;
+    spawnAccum = 0;
+    renderTally(0, 0, 0, statsFromCounts(trueCounts, 0), statsFromCounts(pubCounts, 0));
+  }
+
+  function startDrop() {
+    resetState();
+    dropping = true;
+    btn.textContent = 'Stop';
+    btn.classList.add('running');
+    lastTs = null;
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function stopDrop() {
+    dropping = false;
+    btn.textContent = 'Start';
+    btn.classList.remove('running');
+  }
+
+  btn.onclick = function () {
+    if (dropping) stopDrop(); else startDrop();
+  };
+
+  // ── Frame loop ─────────────────────────────────────────────────────────
+  function frame(ts) {
+    if (!lastTs) lastTs = ts;
+    var dt = Math.min(ts - lastTs, 50);
+    lastTs = ts;
+    var sosProb = parseInt(sosSlider.value) / 100;
+
+    // Spawn
+    if (dropping) {
+      spawnAccum += dt;
+      while (spawnAccum >= SPAWN_INTERVAL) {
+        spawnAccum -= SPAWN_INTERVAL;
+        balls.push(new Ball());
+      }
+    }
+
+    // Update
+    for (var i = 0; i < balls.length; i++) {
+      var b = balls[i];
+      b.update(dt);
+      if (b.done && !b.counted) {
+        b.counted = true;
+        landed++;
+        trueCounts[b.bin]++;
+        if (trueCounts[b.bin] > maxTrue) maxTrue = trueCounts[b.bin];
+        var sig = isSig(b.bin);
+
+        if (!sig && sosProb > 0 && Math.random() < sosProb) {
+          // Falls through trapdoor
+          b.filtering = true;
+          b.filterFromY = b.y;
+          filtered++;
+        } else {
+          // Settles into stack
+          var pos = stackPos(b.bin, pubCounts[b.bin]);
+          b.settling = true;
+          b.settleFromX = b.x;
+          b.settleFromY = b.y;
+          b.settleToX = pos.x;
+          b.settleToY = pos.y;
+          pubCounts[b.bin]++;
+          published++;
+        }
+      }
+    }
+
+    // Prune finished balls
+    if (balls.length > 500) {
+      var kept = [];
+      for (var p = 0; p < balls.length; p++) {
+        if (!balls[p].settled && !balls[p].filterDone) kept.push(balls[p]);
+      }
+      balls = kept;
+    }
+
+    render();
+
+    // Tally
+    var trueStats = statsFromCounts(trueCounts, landed);
+    var pubStats = statsFromCounts(pubCounts, published);
+    renderTally(landed, published, filtered, trueStats, pubStats);
+
+    // Keep looping?
+    var anyInFlight = dropping;
+    if (!anyInFlight) {
+      for (var k = 0; k < balls.length; k++) {
+        if (!balls[k].settled && !balls[k].filterDone) { anyInFlight = true; break; }
+      }
+    }
+    if (anyInFlight) raf = requestAnimationFrame(frame);
+    else raf = null;
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, W, H);
+
+    var sosLevel  = parseInt(sosSlider.value);
+    var sosActive = sosLevel > 0;
+    var twoTailed = isTwoTailed();
+
+    // ── Pegs ──
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c <= r; c++) {
+        var px = pegX(r, c), py = pegY(r);
+        ctx.beginPath(); ctx.arc(px, py + sc * 1.5, PEG_R, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,0,0,0.07)'; ctx.fill();
+        ctx.beginPath(); ctx.arc(px, py, PEG_R, 0, Math.PI * 2);
+        ctx.fillStyle = '#9ca3af'; ctx.fill();
+        ctx.beginPath(); ctx.arc(px - sc * 1.5, py - sc * 1.5, PEG_R * 0.35, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.fill();
+      }
+    }
+
+    var boardL = boardLeftX();
+    var boardR = boardRightX();
+    var cutL = leftCutX();
+    var cutR = rightCutX();
+
+    // ── Non-sig zone shading ──
+    if (sosActive) {
+      var alpha = Math.min(0.06, sosLevel / 100 * 0.06);
+      ctx.fillStyle = 'rgba(124,58,237,' + alpha + ')';
+      if (twoTailed && cutL !== null && cutR !== null && cutR > cutL) {
+        ctx.fillRect(cutL, BIN_TOP - sc * 22, cutR - cutL, BIN_H + sc * 24);
+      }
+      if (!twoTailed && cutR !== null && cutR > boardL) {
+        ctx.fillRect(boardL, BIN_TOP - sc * 22, cutR - boardL, BIN_H + sc * 24);
+      }
+    }
+
+    // ── Zone labels ──
+    if (sosActive) {
+      var labelY = BIN_TOP - sc * 8;
+      ctx.textAlign = 'center';
+      ctx.font = 'bold ' + Math.round(sc * 14) + 'px system-ui,sans-serif';
+      if (twoTailed) {
+        if (cutL !== null && cutL - boardL > sc * 28) {
+          ctx.fillStyle = 'rgba(220,80,60,0.8)';
+          ctx.fillText('Significant', (boardL + cutL) / 2, labelY);
+        }
+        if (cutR !== null && boardR - cutR > sc * 28) {
+          ctx.fillStyle = 'rgba(220,80,60,0.8)';
+          ctx.fillText('Significant', (cutR + boardR) / 2, labelY);
+        }
+        if (cutL !== null && cutR !== null && cutR - cutL > sc * 56) {
+          ctx.fillStyle = 'rgba(124,58,237,0.65)';
+          ctx.fillText('Not significant', (cutL + cutR) / 2, labelY);
+        }
+      } else {
+        if (cutR !== null && cutR - boardL > sc * 56) {
+          ctx.fillStyle = 'rgba(124,58,237,0.65)';
+          ctx.fillText('Not significant', (boardL + cutR) / 2, labelY);
+        }
+        if (cutR !== null && boardR - cutR > sc * 28) {
+          ctx.fillStyle = 'rgba(220,80,60,0.8)';
+          ctx.fillText('Significant', (cutR + boardR) / 2, labelY);
+        }
+      }
+    }
+
+    // ── Significance threshold lines ──
+    if (sosActive) {
+      ctx.strokeStyle = 'rgba(124,58,237,0.35)';
+      ctx.lineWidth = sc * 1.8;
+      ctx.setLineDash([sc * 5, sc * 3]);
+      ctx.beginPath();
+      if (twoTailed && cutL !== null && cutL > boardL + sc) {
+        ctx.moveTo(cutL, BIN_TOP - sc * 22);
+        ctx.lineTo(cutL, BIN_BOTTOM + sc * 2);
+      }
+      if (cutR !== null && cutR < boardR - sc) {
+        ctx.moveTo(cutR, BIN_TOP - sc * 22);
+        ctx.lineTo(cutR, BIN_BOTTOM + sc * 2);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // ── Bin walls (vertical dividers) ──
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = sc * 1;
+    for (var w = 0; w <= BINS; w++) {
+      var wx = binCX(0) - PS / 2 + w * PS;
+      ctx.beginPath();
+      ctx.moveTo(wx, BIN_TOP);
+      ctx.lineTo(wx, BIN_BOTTOM);
+      ctx.stroke();
+    }
+
+    // ── Bin floors (with trapdoors for non-sig bins) ──
+    for (var i = 0; i < BINS; i++) {
+      var lx = binCX(i) - PS / 2;
+      var rx = binCX(i) + PS / 2;
+
+      if (!isSig(i) && sosLevel > 0) {
+        // Trapdoor: gap in floor proportional to SOS %
+        var openFrac = sosLevel / 100;
+        var openW = (rx - lx - sc * 6) * openFrac;
+        var fcx = binCX(i);
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = sc * 1;
+        // Left floor stub
+        ctx.beginPath();
+        ctx.moveTo(lx, BIN_BOTTOM);
+        ctx.lineTo(fcx - openW / 2, BIN_BOTTOM);
+        ctx.stroke();
+        // Right floor stub
+        ctx.beginPath();
+        ctx.moveTo(fcx + openW / 2, BIN_BOTTOM);
+        ctx.lineTo(rx, BIN_BOTTOM);
+        ctx.stroke();
+        // Hinge dots
+        if (openW > sc * 6) {
+          ctx.fillStyle = '#bbb';
+          ctx.beginPath();
+          ctx.arc(fcx - openW / 2, BIN_BOTTOM, sc * 1.2, 0, Math.PI * 2);
+          ctx.arc(fcx + openW / 2, BIN_BOTTOM, sc * 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else {
+        // Solid floor
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = sc * 1;
+        ctx.beginPath();
+        ctx.moveTo(lx, BIN_BOTTOM);
+        ctx.lineTo(rx, BIN_BOTTOM);
+        ctx.stroke();
+      }
+    }
+
+    // ── True-height ghost line (where stack would be without filtering) ──
+    if (sosActive && filtered > 0) {
+      ctx.setLineDash([sc * 3, sc * 2]);
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+      ctx.lineWidth = sc * 1;
+      for (var i = 0; i < BINS; i++) {
+        if (trueCounts[i] > pubCounts[i]) {
+          var trueRows = Math.ceil(trueCounts[i] / BPR);
+          var ghostY = BIN_BOTTOM - trueRows * BALL_D - sc * 1.5;
+          ghostY = Math.max(ghostY, BIN_TOP + sc * 1);
+          var glx = binCX(i) - PS / 2 + sc * 2;
+          var grx = binCX(i) + PS / 2 - sc * 2;
+          ctx.beginPath();
+          ctx.moveTo(glx, ghostY);
+          ctx.lineTo(grx, ghostY);
+          ctx.stroke();
+        }
+      }
+      ctx.setLineDash([]);
+    }
+
+    // ── Settled balls (batched draw) ──
+    ctx.fillStyle = '#e8604c';
+    ctx.beginPath();
+    for (var i = 0; i < BINS; i++) {
+      for (var j = 0; j < settled[i].length; j++) {
+        var s = settled[i][j];
+        ctx.moveTo(s.x + BALL_R - 0.3, s.y);
+        ctx.arc(s.x, s.y, BALL_R - 0.3, 0, Math.PI * 2);
+      }
+    }
+    ctx.fill();
+
+    // ── Active balls (in-flight, settling, filtering) ──
+    for (var j = 0; j < balls.length; j++) balls[j].draw();
+
+    // ── X-axis ──
+    var centerRight = Math.floor(BINS / 2);
+    var centerLeft = centerRight - 1;
+    var zeroX = (binCX(centerLeft) + binCX(centerRight)) / 2;
+    ctx.strokeStyle = '#aaa';
+    ctx.lineWidth = sc * 1;
+    ctx.beginPath();
+    ctx.moveTo(zeroX, BIN_BOTTOM + sc * 3);
+    ctx.lineTo(zeroX, BIN_BOTTOM + sc * 10);
+    ctx.stroke();
+    ctx.fillStyle = '#555';
+    ctx.font = 'bold ' + Math.round(sc * 13) + 'px system-ui,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('0.5', zeroX, BIN_BOTTOM + sc * 23);
+
+    ctx.font = Math.round(sc * 11) + 'px system-ui,sans-serif';
+    ctx.fillStyle = '#999';
+    ctx.textAlign = 'left';
+    ctx.fillText('0', binCX(0) - PS / 2 + sc * 2, BIN_BOTTOM + sc * 23);
+    ctx.textAlign = 'right';
+    ctx.fillText('1', binCX(BINS - 1) + PS / 2 - sc * 2, BIN_BOTTOM + sc * 23);
+
+    ctx.fillStyle = '#aaa';
+    ctx.font = Math.round(sc * 11) + 'px system-ui,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Estimated p(right)', CX, BIN_BOTTOM + sc * 42);
+
+    // ── Legend ──
+    if (sosActive && filtered > 0) {
+      var legY = BIN_BOTTOM + sc * 58;
+      ctx.setLineDash([sc * 3, sc * 2]);
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+      ctx.lineWidth = sc * 1;
+      ctx.beginPath();
+      ctx.moveTo(CX - sc * 52, legY - sc * 2);
+      ctx.lineTo(CX - sc * 38, legY - sc * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = Math.round(sc * 9) + 'px system-ui,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#999';
+      ctx.fillText('= true distribution height', CX - sc * 35, legY);
+    }
+  }
+
+  updateTailBtn();
+  resetState();
+  render();
+})();
+</script>
+</body>
+</html>
