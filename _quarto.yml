@@ -4,6 +4,7 @@ project:
   resources:
     - files/**
     - s/**
+    - cv/index.html
   pre-render:
     - _scripts/pre_render_cv.sh
     - _scripts/pre_render_research.sh
