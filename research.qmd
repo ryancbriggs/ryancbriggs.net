@@ -63,8 +63,6 @@ Briggs, Ryan C. (2024). [Aid Targeting](papers/Briggs (2024) Aid Targeting.pdf) 
 
 ## Work in Progress
 
-Briggs, Ryan C. and Vivalt, Eva. [Are Impact Evaluations in Development Economics Underpowered?](https://osf.io/8hkc5/)
-
 Briggs, Ryan C., Mellon, Jonathan, and Arel-Bundock, Vincent. [It must be very hard to publish null results](https://osf.io/preprints/socarxiv/zr5vf_v1).
 
 ## Selected Other Writing
