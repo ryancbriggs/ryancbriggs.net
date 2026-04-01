@@ -206,13 +206,16 @@ def normalize_author_list(raw):
 
 
 
+SITE_BASE_URL = "https://ryancbriggs.net/"
+
 def format_pub_url(entry):
     """Get the best URL for a publication.
 
     Prefers a local file (for linking to hosted PDFs) over DOI/URL links.
+    Local file paths are turned into absolute URLs using the site base.
     """
     if "file" in entry and entry["file"]:
-        return entry["file"]
+        return SITE_BASE_URL + entry["file"]
     if "doi" in entry and entry["doi"]:
         return f"https://doi.org/{entry['doi']}"
     return entry.get("url", "")
