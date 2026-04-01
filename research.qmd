@@ -6,9 +6,9 @@ title: "Research"
 
 ### Methodology
 
-Brodeur, Abel (and >300 co-authors including Ryan C. Briggs). (accepted). Reproducibility and Robustness of Economics and Political Science Research. *Nature*.
+Brodeur, Abel (and >300 co-authors including Ryan C. Briggs). (2026). [Reproducibility and Robustness of Economics and Political Science Research](papers/Briggs (2026) Reproducibility.pdf). *Nature*, 652, 151–156.
 
-Aczel, Balazs (and >400 co-authors including Ryan C. Briggs). (2026). [Investigating the Analytical Robustness of the Social and Behavioural Sciences](papers/Briggs (2026) Score.pdf). *Nature*.
+Aczel, Balazs (and >400 co-authors including Ryan C. Briggs). (2026). [Investigating the Analytical Robustness of the Social and Behavioural Sciences](papers/Briggs (2026) Score.pdf). *Nature*, 652, 135–142.
 
 Arel-Bundock, Vincent, Briggs, Ryan C., Doucouliagos, Hristos, Mendoza Aviña, Marco, and Stanley, T.D. (2026). [Quantitative Political Science Research is Greatly Underpowered](https://doi.org/10.1086/734279). *Journal of Politics*, 88(1), 36–46.
 
