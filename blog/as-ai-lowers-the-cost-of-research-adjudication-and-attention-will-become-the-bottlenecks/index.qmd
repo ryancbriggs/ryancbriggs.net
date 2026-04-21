@@ -63,6 +63,6 @@ Information manipulation is going to get cheaper much faster than interacting wi
 
 ***
 
-*Note: This is a short position paper written for the Notes on the Future of Quantitative Social Science workshop held at the University of Toront in May 2026.*
+*Note: This is a short position paper written for the Notes on the Future of Quantitative Social Science workshop held at the University of Toronto in May 2026.*
 
 # Works Cited
